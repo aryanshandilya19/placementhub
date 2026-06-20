@@ -3,6 +3,8 @@ import cors from 'cors';
 import cookieParser from 'cookie-parser';
 import helmet from 'helmet';
 import morgan from 'morgan';
+import authRoutes from './routes/auth.routes.js';
+import { errorHandler } from './middlewares/error.middleware.js';
 
 const app = express();
 
@@ -25,11 +27,13 @@ app.get('/health', (req, res) => {
   res.status(200).json({ status: 'ok', timestamp: new Date().toISOString() });
 });
 
-// API routes will be mounted here in future steps
-// app.use('/api/v1/auth', authRoutes);
+app.use('/api/v1/auth', authRoutes);
 
 app.use((req, res) => {
   res.status(404).json({ success: false, message: `Route ${req.originalUrl} not found` });
 });
+
+// Error handler MUST be the last middleware registered
+app.use(errorHandler);
 
 export default app;
