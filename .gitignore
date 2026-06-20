@@ -1,0 +1,33 @@
+# Dependencies
+node_modules/
+*/node_modules/
+
+# Environment files - NEVER commit these
+.env
+.env.local
+.env.production
+*/.env
+*/.env.local
+*/.env.production
+
+# Build outputs
+dist/
+build/
+*/dist/
+*/build/
+
+# Logs
+logs/
+*.log
+npm-debug.log*
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Editor
+.vscode/settings.json
+.idea/
+
+# Uploads (local dev only)
+uploads/
