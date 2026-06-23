@@ -1,10 +1,15 @@
+import { BrowserRouter } from 'react-router-dom';
+import { Toaster } from 'react-hot-toast';
+import AppRoutes from './routes/AppRoutes.jsx';
+import './index.css';
+
 function App() {
   return (
-    <div>
-      <h1>PlacementHub</h1>
-      <p>Server is being set up...</p>
-    </div>
-  )
+    <BrowserRouter>
+      <Toaster position="top-right" />
+      <AppRoutes />
+    </BrowserRouter>
+  );
 }
 
-export default App
+export default App;
