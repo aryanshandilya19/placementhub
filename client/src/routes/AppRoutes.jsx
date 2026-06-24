@@ -4,6 +4,7 @@ import RegisterPage from '../features/auth/pages/RegisterPage.jsx';
 import VerifyEmailPage from '../features/auth/pages/VerifyEmailPage.jsx';
 import DashboardPage from '../pages/DashboardPage.jsx';
 import ProfilePage from '../features/profile/pages/ProfilePage.jsx';
+import ApplicationsPage from '../features/applications/pages/ApplicationsPage.jsx';
 import ProtectedRoute from './ProtectedRoute.jsx';
 
 function AppRoutes() {
@@ -13,22 +14,9 @@ function AppRoutes() {
       <Route path="/login" element={<LoginPage />} />
       <Route path="/register" element={<RegisterPage />} />
       <Route path="/verify-email/:token" element={<VerifyEmailPage />} />
-      <Route
-        path="/dashboard"
-        element={
-          <ProtectedRoute>
-            <DashboardPage />
-          </ProtectedRoute>
-        }
-      />
-      <Route
-        path="/profile"
-        element={
-          <ProtectedRoute>
-            <ProfilePage />
-          </ProtectedRoute>
-        }
-      />
+      <Route path="/dashboard" element={<ProtectedRoute><DashboardPage /></ProtectedRoute>} />
+      <Route path="/profile" element={<ProtectedRoute><ProfilePage /></ProtectedRoute>} />
+      <Route path="/applications" element={<ProtectedRoute><ApplicationsPage /></ProtectedRoute>} />
       <Route path="*" element={<Navigate to="/dashboard" replace />} />
     </Routes>
   );
