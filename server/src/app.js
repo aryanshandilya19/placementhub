@@ -7,6 +7,7 @@ import authRoutes from './routes/auth.routes.js';
 import userRoutes from './routes/user.routes.js';
 import { errorHandler } from './middlewares/error.middleware.js';
 import applicationRoutes from './routes/application.routes.js';
+import dsaRoutes from './routes/dsa.routes.js';
 const app = express();
 
 app.use(helmet());
@@ -31,6 +32,7 @@ app.get('/health', (req, res) => {
 app.use('/api/v1/auth', authRoutes);
 app.use('/api/v1/users', userRoutes);
 app.use('/api/v1/applications', applicationRoutes);
+app.use('/api/v1/dsa', dsaRoutes);
 app.use((req, res) => {
   res.status(404).json({ success: false, message: `Route ${req.originalUrl} not found` });
 });
