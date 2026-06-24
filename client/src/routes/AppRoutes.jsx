@@ -5,6 +5,7 @@ import VerifyEmailPage from '../features/auth/pages/VerifyEmailPage.jsx';
 import DashboardPage from '../pages/DashboardPage.jsx';
 import ProfilePage from '../features/profile/pages/ProfilePage.jsx';
 import ApplicationsPage from '../features/applications/pages/ApplicationsPage.jsx';
+import DSAPage from '../features/dsa/pages/DSAPage.jsx';
 import ProtectedRoute from './ProtectedRoute.jsx';
 
 function AppRoutes() {
@@ -17,6 +18,7 @@ function AppRoutes() {
       <Route path="/dashboard" element={<ProtectedRoute><DashboardPage /></ProtectedRoute>} />
       <Route path="/profile" element={<ProtectedRoute><ProfilePage /></ProtectedRoute>} />
       <Route path="/applications" element={<ProtectedRoute><ApplicationsPage /></ProtectedRoute>} />
+      <Route path="/dsa" element={<ProtectedRoute><DSAPage /></ProtectedRoute>} />
       <Route path="*" element={<Navigate to="/dashboard" replace />} />
     </Routes>
   );
