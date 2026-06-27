@@ -9,6 +9,7 @@ import { errorHandler } from './middlewares/error.middleware.js';
 import applicationRoutes from './routes/application.routes.js';
 import dsaRoutes from './routes/dsa.routes.js';
 import analyticsRoutes from './routes/analytics.routes.js';
+import adminRoutes from './routes/admin.routes.js';
 const app = express();
 
 app.use(helmet());
@@ -35,6 +36,7 @@ app.use('/api/v1/users', userRoutes);
 app.use('/api/v1/applications', applicationRoutes);
 app.use('/api/v1/dsa', dsaRoutes);
 app.use('/api/v1/analytics', analyticsRoutes);
+app.use('/api/v1/admin', adminRoutes);
 
 app.use((req, res) => {
   res.status(404).json({ success: false, message: `Route ${req.originalUrl} not found` });
