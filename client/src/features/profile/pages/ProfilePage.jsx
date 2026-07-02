@@ -66,7 +66,7 @@ function ProfilePage() {
   };
 
   return (
-    <div style={{ maxWidth: '700px', margin: '2rem auto', padding: '0 1rem' }}>
+    <div style={{ maxWidth: '700px' }}>
       <div className="auth-card" style={{ maxWidth: '100%' }}>
 
         {/* Avatar section */}

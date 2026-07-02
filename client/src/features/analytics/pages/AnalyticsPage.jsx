@@ -38,7 +38,7 @@ function AnalyticsPage() {
     .map(([name, value]) => ({ name: name.charAt(0).toUpperCase() + name.slice(1), value }));
 
   return (
-    <div style={{ maxWidth: '1000px', margin: '0 auto', padding: '2rem 1rem' }}>
+    <div>
       <h1 style={{ fontSize: '1.5rem', fontWeight: '700', marginBottom: '1.5rem' }}>Analytics</h1>
 
       {/* ── Top stats ── */}

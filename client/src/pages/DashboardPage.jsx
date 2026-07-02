@@ -15,18 +15,14 @@ function DashboardPage() {
   ];
 
   return (
-    <div style={{ padding: '2rem', maxWidth: '900px', margin: '0 auto' }}>
-      <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '2rem' }}>
-        <div>
-          <h1 style={{ fontSize: '1.5rem', fontWeight: '700' }}>Welcome, {user?.name}!</h1>
-          <p style={{ color: '#64748b', fontSize: '0.875rem', marginTop: '0.25rem' }}>
-            {user?.role === 'admin' && <span style={{ color: '#dc2626', fontWeight: '600' }}>Admin · </span>}
-            {user?.email}
-          </p>
-        </div>
-        <button onClick={logoutUser} disabled={loading} className="btn-primary" style={{ background: '#dc2626' }}>
-          {loading ? 'Logging out...' : 'Logout'}
-        </button>
+    <div>
+      <div style={{ marginBottom: '2rem' }}>
+        <h1 style={{ fontSize: '1.5rem', fontWeight: '700' }}>
+          Welcome back, {user?.name?.split(' ')[0]}!
+        </h1>
+        <p style={{ color: '#64748b', fontSize: '0.875rem', marginTop: '0.25rem' }}>
+          Here's your placement journey at a glance.
+        </p>
       </div>
 
       <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))', gap: '1rem' }}>
@@ -36,9 +32,8 @@ function DashboardPage() {
             boxShadow: '0 2px 8px rgba(0,0,0,0.06)', textDecoration: 'none',
             color, fontWeight: '600', fontSize: '1rem',
             borderLeft: `4px solid ${color}`,
-            transition: 'transform 0.15s',
           }}>
-            {label}
+            {label} →
           </Link>
         ))}
       </div>
