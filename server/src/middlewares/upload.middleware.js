@@ -14,18 +14,22 @@ const avatarStorage = new CloudinaryStorage({
 
 const resumeStorage = new CloudinaryStorage({
   cloudinary,
-  params: {
+  params: (req, file) => ({
     folder: 'placementhub/resumes',
     allowed_formats: ['pdf'],
     resource_type: 'raw',
-  },
+    public_id: `resume_${req.user._id}_${Date.now()}`,
+  }),
 });
 
-const fileFilter = (allowedTypes) => (req, file, cb) => {
-  if (allowedTypes.includes(file.mimetype)) {
+const fileFilter = (allowedMimetypes) => (req, file, cb) => {
+  if (allowedMimetypes.includes(file.mimetype)) {
     cb(null, true);
   } else {
-    cb(new ApiError(400, `Invalid file type. Allowed: ${allowedTypes.join(', ')}`), false);
+    cb(
+      new ApiError(400, `Invalid file type. Allowed types: ${allowedMimetypes.join(', ')}`),
+      false
+    );
   }
 };
 
@@ -40,3 +44,17 @@ export const uploadResume = multer({
   limits: { fileSize: 5 * 1024 * 1024 }, // 5MB
   fileFilter: fileFilter(['application/pdf']),
 }).single('resume');
+
+// Wraps multer errors into our ApiError format
+export const handleUploadError = (uploadMiddleware) => (req, res, next) => {
+  uploadMiddleware(req, res, (err) => {
+    if (!err) return next();
+    if (err instanceof multer.MulterError) {
+      if (err.code === 'LIMIT_FILE_SIZE') {
+        return next(new ApiError(400, 'File too large'));
+      }
+      return next(new ApiError(400, err.message));
+    }
+    next(err);
+  });
+};
