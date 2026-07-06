@@ -1,11 +1,12 @@
-import { getTransporter } from '../config/email.js';
+import { Resend } from 'resend';
 import { logger } from '../utils/logger.js';
+
+const resend = new Resend(process.env.RESEND_API_KEY);
 
 export const sendVerificationEmail = async (toEmail, name, verificationLink) => {
   try {
-    const transporter = getTransporter();
-    await transporter.sendMail({
-      from: process.env.EMAIL_FROM,
+    await resend.emails.send({
+      from: 'PlacementHub <onboarding@resend.dev>',
       to: toEmail,
       subject: 'Verify your PlacementHub account',
       html: `
@@ -26,18 +27,17 @@ export const sendVerificationEmail = async (toEmail, name, verificationLink) => 
 
 export const sendPasswordResetEmail = async (toEmail, name, resetLink) => {
   try {
-    const transporter = getTransporter();
-    await transporter.sendMail({
-      from: process.env.EMAIL_FROM,
+    await resend.emails.send({
+      from: 'PlacementHub <onboarding@resend.dev>',
       to: toEmail,
       subject: 'Reset your PlacementHub password',
       html: `
         <div style="font-family: sans-serif; max-width: 500px; margin: auto;">
           <h2>Hi ${name},</h2>
-          <p>We received a request to reset your password. Click below to set a new one.</p>
+          <p>We received a request to reset your password.</p>
           <a href="${resetLink}" style="display:inline-block;padding:12px 24px;background:#dc2626;color:#fff;text-decoration:none;border-radius:6px;">Reset Password</a>
           <p>This link expires in 1 hour.</p>
-          <p>If you didn't request this, ignore this email — your password will remain unchanged.</p>
+          <p>If you didn't request this, ignore this email.</p>
         </div>
       `,
     });
